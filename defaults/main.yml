@@ -1,0 +1,4 @@
+---
+bucket_path: gs://test-tokens/
+folder: test1
+dest_path: /tmp/

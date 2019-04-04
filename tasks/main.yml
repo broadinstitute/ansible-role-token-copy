@@ -1,0 +1,8 @@
+---
+- name: checking for gcs bucket path
+  shell: "gsutil list| grep -q {{ bucket_path }}"
+  register: results
+  failed_when: results.rc != 0
+
+- name: "copying token to {{ dest_path }}/{{ item }}"
+  shell: "gsutil rsync -r  {{ bucket_path }}{{ folder }} {{ dest_path }}"
