@@ -6,3 +6,9 @@
 
 - name: "copying token to {{ dest_path }}/{{ item }}"
   shell: "gsutil rsync -r  {{ bucket_path }}{{ folder }} {{ dest_path }}"
+
+- name: set vault environment Variables
+  shell: "echo export VAULT_ADDR=https://clotho.broadinstitute.org:8200 >> /root/.bash_rc && source /root/.bash_rc"
+
+- name: set vault environment Variables
+  shell: "echo export VAULT_TOKEN=$(cat /tmp/vault-token*) >> /root/.bash_rc && source /root/.bash_rc"  
