@@ -8,7 +8,7 @@
   shell: "gsutil rsync -r  {{ bucket_path }}{{ folder }} {{ dest_path }}"
 
 - name: set vault environment Variables
-  shell: "echo export VAULT_ADDR=https://clotho.broadinstitute.org:8200 >> /root/.bashrc && source /root/.bash_rc"
+  shell: "echo export VAULT_ADDR=https://clotho.broadinstitute.org:8200 >> /root/.bashrc && source /root/.bashrc"
 
 - name: set vault environment Variables
-  shell: "echo export VAULT_TOKEN=$(cat /tmp/vault-token*) >> /root/.bashrc && source /root/.bash_rc"
+  shell: "echo export VAULT_TOKEN=$(cat /tmp/vault-token*) >> /root/.bashrc && source /root/.bashrc"
