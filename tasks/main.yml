@@ -11,16 +11,10 @@
 #I tried this with environment variable but could not figure out how to source them within the same run
 - name: set anisble vault environment Variable VAULT_ADDR
   shell: echo https://clotho.broadinstitute.org:8200
-  register: TASK_VAULT_ADDR
+  register: VAULT_ADDR
   when: copy_token.changed
 
 - name: set ansibel vault environment Variable
   shell: cat /tmp/vault-token*
-  register: TASK_VAULT_TOKEN
-  when: copy_token.changed
-
-- name: set fact
-  set_fact:
-    VAULT_ADDR: TASK_VAULT_ADDR.results
-    VAULT_TOKEN: TASK_VAULT_TOKEN.results
+  register: VAULT_TOKEN
   when: copy_token.changed
