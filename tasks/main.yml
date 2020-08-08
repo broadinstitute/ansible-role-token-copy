@@ -15,6 +15,6 @@
   when: copy_token.changed
 
 - name: set ansible vault environment Variable
-  shell: "cat {{ dest_path }}{{ item }}"
+  shell: "cat {{ dest_path }}vault-token*"
   register: VAULT_TOKEN
   when: copy_token.changed
