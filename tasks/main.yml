@@ -5,7 +5,7 @@
   failed_when: results.rc != 0
 
 - name: "copying token to {{ dest_path }}/{{ item }}"
-  shell: "gsutil rsync -r  {{ bucket_path }}{{ folder }} {{ dest_path }} -p {{ gcloud_project }}"
+  shell: "gsutil rsync -r  {{ bucket_path }}{{ folder }} {{ dest_path }}"
   register: copy_token
 
 #I tried this with environment variable but could not figure out how to source them within the same run
