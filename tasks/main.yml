@@ -12,9 +12,9 @@
 - name: set ansible vault environment Variable VAULT_ADDR
   shell: echo https://clotho.broadinstitute.org:8200
   register: VAULT_ADDR
-  when: copy_token.changed
+  when: copy_token
 
 - name: set ansible vault environment Variable
   shell: "cat {{ dest_path }}vault-token*"
   register: VAULT_TOKEN
-  when: copy_token.changed
+  when: copy_token
