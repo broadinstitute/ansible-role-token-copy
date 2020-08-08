@@ -1,20 +1,20 @@
 ---
 - name: checking for gcs bucket path
-  shell: "gsutil list| grep -q {{ bucket_path }}"
+  shell: "gsutil list -p {{ gcloud_project }}| grep -q {{ bucket_path }}"
   register: results
   failed_when: results.rc != 0
 
 - name: "copying token to {{ dest_path }}/{{ item }}"
-  shell: "gsutil rsync -r  {{ bucket_path }}{{ folder }} {{ dest_path }}"
+  shell: "gsutil rsync -r  {{ bucket_path }}{{ folder }} {{ dest_path }} -p {{ gcloud_project }}"
   register: copy_token
 
 #I tried this with environment variable but could not figure out how to source them within the same run
-- name: set anisble vault environment Variable VAULT_ADDR
+- name: set ansible vault environment Variable VAULT_ADDR
   shell: echo https://clotho.broadinstitute.org:8200
   register: VAULT_ADDR
   when: copy_token.changed
 
-- name: set ansibel vault environment Variable
+- name: set ansible vault environment Variable
   shell: cat /tmp/vault-token*
   register: VAULT_TOKEN
   when: copy_token.changed
