@@ -10,11 +10,9 @@
 
 #I tried this with environment variable but could not figure out how to source them within the same run
 - name: set ansible vault environment Variable VAULT_ADDR
-  shell: echo https://clotho.broadinstitute.org:8200
-  register: VAULT_ADDR
+  shell: export VAULT_ADDR=https://clotho.broadinstitute.org:8200
   when: copy_token.stdout != "" or copy_token.changed
 
 - name: set ansible vault environment Variable
-  shell: "cat {{ dest_path }}vault-token*"
-  register: VAULT_TOKEN
+  shell: export VAULT_TOKEN=$(cat {{ dest_path }}vault-token*)
   when: copy_token.stdout != "" or copy_token.changed
