@@ -19,8 +19,13 @@
 #  register: VAULT_TOKEN
 #  when: (copy_token.stdout != "") or copy_token.changed
 
-- name: set vault env variables
-  shell: "export VAULT_ADDR=$VAULT_ADDR; export VAULT_TOKEN=$VAULT_TOKEN"
+- name: set vault address
+  shell: "grep -q '^VAULT_ADDR' /root/.bashrc && sed -i 's/^VAULT_ADDR.*/VAULT_ADDR=${VAULT_ADDR}/' file || echo 'VAULT_ADDR=${VAULT_ADDR}' >> /root/.bashrc"
   environment:
     VAULT_ADDR: "echo https://clotho.broadinstitute.org:8200"
+
+- name: set vault token
+  shell: "grep -q '^VAULT_TOKEN' /root/.bashrc && sed -i 's/^VAULT_TOKEN.*/VAULT_TOKEN=${VAULT_TOKEN}/' file || echo 'VAULT_TOKEN=${VAULT_TOKEN}' >> /root/.bashrc"
+  environment:
     VAULT_TOKEN: "cat {{ dest_path }}vault-token*"
+    
