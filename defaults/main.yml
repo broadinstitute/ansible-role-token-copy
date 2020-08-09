@@ -3,3 +3,5 @@ bucket_path: gs://test-tokens/
 gcloud_project: test
 folder: test1
 dest_path: /tmp/
+token_name: test
+vault_addr: test
