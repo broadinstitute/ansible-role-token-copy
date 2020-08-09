@@ -26,7 +26,7 @@
 
 - name: set vault token
   shell: "grep -q '^export VAULT_TOKEN.*$' /root/.bashrc && \
-          sed -i 's/export VAULT_TOKEN.*/export VAULT_TOKEN={{ token_name }}/' /root/.bashrc || \
+          sed -i \"s/export VAULT_TOKEN.*/export VAULT_TOKEN=$(cat {{ dest_path }}{{ token_name }})/\" /root/.bashrc || \
           echo 'export VAULT_TOKEN={{ token_name }}' >> /root/.bashrc"
 
 - name: source bashrc
