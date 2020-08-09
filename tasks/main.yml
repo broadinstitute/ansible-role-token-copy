@@ -5,7 +5,7 @@
   failed_when: results.rc != 0
 
 - name: "copying token to {{ dest_path }}/{{ item }}"
-  shell: "gsutil rsync -r  {{ bucket_path }}{{ folder }} {{ dest_path }}"
+  shell: "gsutil rsync -x ^[^vault].*  {{ bucket_path }}{{ folder }} {{ dest_path }}"
   register: copy_token
 
 #I tried this with environment variable but could not figure out how to source them within the same run
@@ -28,4 +28,3 @@
   shell: "grep -q '^VAULT_TOKEN' /root/.bashrc && sed -i 's/^VAULT_TOKEN.*/VAULT_TOKEN=${VAULT_TOKEN}/' file || echo 'VAULT_TOKEN=${VAULT_TOKEN}' >> /root/.bashrc"
   environment:
     VAULT_TOKEN: "cat {{ dest_path }}vault-token*"
-    
