@@ -23,8 +23,6 @@
   shell: "grep -q '^VAULT_ADDR' /root/.bashrc && \
           sed -i 's/^VAULT_ADDR.*/VAULT_ADDR={{ vault_addr }}/' file || \
           echo 'VAULT_ADDR={{ vault_addr }}' >> /root/.bashrc"
-  environment:
-    VAULT_ADDR: "echo https://clotho.broadinstitute.org:8200"
 
 - name: set vault token
   shell: "grep -q '^.*VAULT_TOKEN.*$' /root/.bashrc && \
