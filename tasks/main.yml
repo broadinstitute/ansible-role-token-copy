@@ -21,13 +21,13 @@
 
 - name: set vault address
   shell: "grep -q '^export VAULT_ADDR' /root/.bashrc && \
-          sed -i 's/^export VAULT_ADDR.*/export VAULT_ADDR=\"{{ vault_addr }}\"/' /root/.bashrc || \
+          sed -i 's/^export VAULT_ADDR.*/export VAULT_ADDR={{ vault_addr }}/' /root/.bashrc || \
           echo 'export VAULT_ADDR=\"{{ vault_addr }}\"' >> /root/.bashrc"
 
 - name: set vault token
   shell: "grep -q '^export VAULT_TOKEN.*$' /root/.bashrc && \
           sed -i \"s/export VAULT_TOKEN.*/export VAULT_TOKEN=$(cat {{ dest_path }}{{ token_name }})/\" /root/.bashrc || \
-          echo 'export VAULT_TOKEN={{ token_name }}' >> /root/.bashrc"
+          echo 'export VAULT_TOKEN=$(cat {{ dest_path }}{{ token_name }})' >> /root/.bashrc"
 
 - name: source bashrc
   shell: "source /root/.bashrc"
