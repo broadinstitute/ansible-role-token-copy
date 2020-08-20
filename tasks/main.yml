@@ -7,27 +7,3 @@
 - name: "copying token to {{ dest_path }}/{{ item }}"
   shell: "gsutil rsync -x ^[^vault].*  {{ bucket_path }}{{ folder }} {{ dest_path }}"
   register: copy_token
-
-#I tried this with environment variable but could not figure out how to source them within the same run
-#- name: set ansible vault environment Variable VAULT_ADDR
-#  shell: "echo https://clotho.broadinstitute.org:8200"
-#  register: VAULT_ADDR
-#  when: (copy_token.stdout != "") or copy_token.changed
-#
-#- name: set ansible vault environment Variable
-#  shell: "cat {{ dest_path }}vault-token*"
-#  register: VAULT_TOKEN
-#  when: (copy_token.stdout != "") or copy_token.changed
-
-#- name: set vault address
-#  shell: "grep -q '^export VAULT_ADDR' /root/.bashrc && \
-#          sed -i \"s/^export VAULT_ADDR.*/export VAULT_ADDR={{ vault_addr }}/\" /root/.bashrc || \
-#          echo \"export VAULT_ADDR=\"{{ vault_addr }}\"\" >> /root/.bashrc"
-#
-#- name: set vault token
-#  shell: "grep -q '^export VAULT_TOKEN.*$' /root/.bashrc && \
-#          sed -i \"s/export VAULT_TOKEN.*/export VAULT_TOKEN=$(cat {{ dest_path }}{{ token_name }})/\" /root/.bashrc || \
-#          echo \"export VAULT_TOKEN=$(cat {{ dest_path }}{{ token_name }})\" >> /root/.bashrc"
-#
-#- name: source bashrc
-#  shell: "source /root/.bashrc"
