@@ -7,6 +7,7 @@
 ```
 ---
 bucket_path: gs://test-tokens/
+gcloud_project: test
 folder: test1
 dest_path: /tmp/
 ```
